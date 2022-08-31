@@ -9,10 +9,11 @@ const expressValidator = require('express-validator');
 require('dotenv').config();
 // import routes
 
-const productRoutes = require('./routes/product');
-const authRoutes = require('./routes/auth'); 
-const userRoutes = require('./routes/users');
+const { productRoutes } = require('./routes/product');
 
+const authRoutes = require('./routes/auth'); 
+const { userRoutes } = require('./routes/users');
+const stripeRoutes = require('./routes/stripe');
 
 
 // app
@@ -47,11 +48,13 @@ app.use(cors());
 
 // routes middleware
 app.use('/auth', authRoutes); 
-app.use('/product', productRoutes);
+app.use('/product', productRoutes); 
 app.use('/user', userRoutes); 
+app.use('/payment', stripeRoutes); 
 
+// `${process.env.REACT_APP_API_URL}/payment/create-payment-intent`
 // `${process.env.REACT_APP_API_URL}/auth/signin`
-
+//`${process.env.REACT_APP_API_URL}/product/:${id}`
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder

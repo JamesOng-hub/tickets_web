@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import Navbar from '../Navbar';
 function SignUp() {
 
     const [values, setValues] = useState({
@@ -57,6 +57,7 @@ function SignUp() {
     };
   return (
     <div>
+      <Navbar/>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label for="name">Name</label>

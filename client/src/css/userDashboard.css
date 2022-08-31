@@ -1,0 +1,116 @@
+
+
+
+.userDashboard__info-card{
+    background: url('../images/userDashboard.jpg');
+    background-repeat: repeat;
+    background-size: contain;
+    /* background-color: #CED4DA;  */
+    padding-top: 50px; 
+    padding-bottom: 30px; 
+    height: 20rem; 
+    color: white;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.userDashboard__info-card-title{
+    font-size: 2rem; 
+}
+
+.userDashboard__info-card-title-dets{
+    font-size: 1.5rem;
+}
+
+.userDashboard__title{
+    margin-left: 15px; 
+    margin-top: 50px; 
+}
+
+.userDashboard__ticket-card{
+    background-color: white; 
+    border-radius: 0.5rem; 
+    margin-top: 20px;
+    margin-bottom: 20px; 
+    margin-left: 35px; 
+    margin-right: 35px; 
+    padding: 20px; 
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    display: flex; 
+    justify-content: space-between;
+}
+
+.userDashboard__purchased-ticket-card{
+    width: 150px; 
+    flex-direction: column; 
+}
+
+
+
+.userDashboard__ticket-card-title{
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+.userDashboard__ticket-card-desp{
+    font-style: italic; 
+}
+
+.userDashboard__ticket-card-dets{
+    display: flex; 
+    align-self: flex-end;
+    font-size: 0.8rem; 
+
+}
+
+.userDashboard__purchased-ticket-card-dets{
+
+    margin-top: 20px;
+    font-size: 0.8rem; 
+}
+
+
+.userDashboard__icon-btn{
+    display: none; 
+    margin: 10px;
+}
+
+.userDashboard__ticket-card-btn-grp{
+    align-self: flex-end;
+}
+
+.userDashboard__ticket-card-btn{
+    margin: 10px; 
+}
+
+
+@media all and (max-width: 600px)  { 
+    /* medium screen sizes */
+    .userDashboard__ticket-card-dets{
+        display: block; 
+        margin-top: 20px;
+        font-size: 0.8rem; 
+    }
+
+    .userDashboard__ticket-card-btn{
+        margin: 10px; 
+        display: none;
+    }
+    .userDashboard__icon-btn{
+        display: block; 
+        margin: 10px;
+    }
+}
+
+
+/* ~~~~~~~~~ */
+
+
+
+
+
+
+

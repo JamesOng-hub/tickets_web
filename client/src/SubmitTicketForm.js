@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import Navbar from "./Navbar";
+import {checkIfAuthenticated} from "./auth/helperFunctions";
+import { Navigate } from "react-router-dom";
 
 //create a state to update the form fields in real time
 //we are also creating a formData as part of the state
@@ -16,7 +18,7 @@ function SubmitTicketForm() {
     loading: false,
     error: "",
     //    createdProduct: '',
-    //    redirectToProfile: false,
+    redirect: false,
     formData: "", //this is the formData to submit to the backend.
   });
 
@@ -29,8 +31,7 @@ function SubmitTicketForm() {
     quantity,
     loading,
     error,
-    //    createdProduct,
-    //    redirectToProfile,
+    redirect,
     formData,
   } = values;
 
@@ -41,6 +42,8 @@ function SubmitTicketForm() {
     });
   }, []);
 
+  const {token, user} = checkIfAuthenticated(); 
+
   const handleChange = (fieldName) => (event) => { //calling a function inside of another function. double arrow functions. 
     const value =
       fieldName === "ticketFile" ? event.target.files[0] : event.target.value;
@@ -50,10 +53,11 @@ function SubmitTicketForm() {
 
   //positng formData() to the backend.
   const createProduct = (product) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/product/create`, {
+    return fetch(`${process.env.REACT_APP_API_URL}/product/create/${user._id}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: product,
     })
@@ -70,9 +74,10 @@ function SubmitTicketForm() {
     setValues({ ...values, error: "", loading: true });
 
     createProduct(formData).then((data) => {
-      // if (data.error) {
-      //   setValues({ ...values, error: data.error });
-      // } else {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({...values, redirect: true}); 
         setValues({
           name: "",
           description: "",
@@ -83,10 +88,15 @@ function SubmitTicketForm() {
           loading: false,
           //    error: '',
           //    createdProduct: '',
-          //    redirectToProfile: false,
+             redirect: false,
         });
-      // }
+      }
     });
+  };
+  const redirectUser = () => {
+    if (redirect) {
+      return (<Navigate to='/'/>);
+    }
   };
 
   // const alertError = () => {
@@ -108,17 +118,23 @@ function SubmitTicketForm() {
     //other syntax.
   };
 
+  const getCurrentdate = () => {
+    return new Date().toJSON().split('T')[0]; 
+  };
+
   //formdata() in js
   return (
-    <div>
-      {/* {alertError()} */}
+    <div className=".pageBackground--bright">
+      {error && (<div>{error}</div>)}
       {/* {alertSuccess()}
       {alertLoading()} */}
-      <form onSubmit={handleSubmit}>
-        <div class="form-group">
-          <label for="ticketFile">Submit your ticket in PDF format</label>
+      {redirectUser()}
+      <div className="submitTicketForm__title">Submission Form</div>
+      <form onSubmit={handleSubmit} className="submitTicketForm__form gradient-border ">
+        <div className="form-group d-flex flex-column">
+          <label for="ticketFile">Submit your ticket in PDF format: </label>
           <input
-            class='btn btn-secondary'
+            className='btn btn-outline-dark'
             type="file"
             id="ticketFile"
             name='ticketFile' //files.<name> is for the files object in the backend. formidible. 
@@ -126,43 +142,63 @@ function SubmitTicketForm() {
             accept='.pdf'
           />
         </div>
-        <div class="form-group">
-          <label for="Name">Name</label>
+        <div className="form-group">
+          <label for="Name">Ticket Title: </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="Name"
             placeholder="Enter Name"
             value={name}
             onChange={handleChange("name")}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="Description">Description: </label>
           <textarea
-            class="form-control"
+            className="form-control"
             id="Description"
             placeholder="Enter Description"
             value={description}
             onChange={handleChange("description")}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group d-flex flex-column">
+          <label for="Date">Date: </label>
+          <input 
+            type="date" 
+            id="Date" 
+            name="date"
+            min= {getCurrentdate()} 
+            onChange = {handleChange("date")}
+          />
+        </div>
+        <div className="form-group d-flex flex-column">
+          <label for="Time">Time: </label>
+          <input 
+            type="time" 
+            id="Time" 
+            name="time"
+            onChange = {handleChange("time")}
+          />
+        </div>
+        <div className="form-group">
           <label for="Price">Price: </label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             id="Price"
             placeholder="Enter Price"
+            min = "0" 
             value={price}
             onChange={handleChange("price")}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           {/* <label for="Category">Category: </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="Category"
             placeholder="Enter Category"
             value = {category}
@@ -170,24 +206,26 @@ function SubmitTicketForm() {
           /> */}
           {/* change to dropdown options */}
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label for="Quantity">Quantity: </label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             id="Quantity"
             placeholder="Enter Quantity"
             value={quantity}
+            min ="0"
             onChange={handleChange("quantity")}
           />
         </div>
         <div>
           <input
             type='submit'
-            class='btn btn-secondary' 
+            className='btn btn-outline-dark' 
           />
         </div>
       </form>
+      {/* <button onClick={() => testFunc()}>testFunc</button> */}
     </div>
   );
 }

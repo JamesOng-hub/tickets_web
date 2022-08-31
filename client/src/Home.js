@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
-import DisplayPDF from "./DisplayPDF";
-import SubmitTicketForm from "./SubmitTicketForm";
+import Navbar from "./Navbar";
+import TestComponent from "./TestComponent";
+
 
 function Home() {
   const [tickets, setTickets] = useState([]);
@@ -37,13 +38,17 @@ function Home() {
   }, []);
 
   return (
+    <div>
+      <Navbar/>
     <div className="home__ticketList row">
       {tickets.map((ticket, i) => (
-        <div key={i} className="col-sm-6 col-12 col-md-4 bg-light">
+        <div key={i} className="col-sm-6 col-12 bg-light">
           <Card ticket={ticket}/>
           {/* <DisplayPDF ticket={ticket}/> */}
         </div>
       ))}
+    </div>
+    <TestComponent/>
     </div>
   );
 }

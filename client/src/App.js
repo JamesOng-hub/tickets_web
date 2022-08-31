@@ -1,14 +1,19 @@
 // import {useEffect, useState} from "react";
 // const API_URL = process.env.REACT_APP_API;
-import Navbar from './Navbar'; 
 import Home from './Home'; 
-import Login from './Login'; 
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"; 
 import SubmitTicketForm from './SubmitTicketForm';
 import TicketInfo from './TicketInfo';
 import SignUp from './auth/SignUp';
 import SignIn from './auth/SignIn';
+import SignOut from './auth/SignOut';
 import UserDashboard from './UserDashboard';
+import UpdateTicketForm from './UpdateTicketForm';
+import StripePayment from './StripePayment';
+import PurchasedTicketPg from './PurchasedTicketPg';
+import PurchaseSuccessPage from './PurchaseSuccessPage';
+import './App.css'; 
+import SellYourTicket from './SellYourTicket';
 
 function App() {
   // const [data, setData] = useState("No data :(");
@@ -25,17 +30,19 @@ function App() {
 
   //add usersID at the back of submit ticket form. 
   return (
-    <div>
-      <Navbar/>
+    <div >
       <Router>
         <Routes>
           <Route exact element={<Home/>} path='/'/>
-          <Route exact element={<Login/>} path='/login'/>
-          <Route exact element={<SubmitTicketForm/>} path='/ticketSubmitForm'/>
+          <Route exact element={<SellYourTicket/>} path='/ticketSubmitForm'/>
           <Route exact element={<SignUp/>} path='/signUp'/>
           <Route exact element={<SignIn/>} path='/signIn'/>
+          <Route exact element={<SignOut/>} path='/signOut'/>
           <Route exact element={<TicketInfo/>} path='/ticketInfo/:ticketId'/>
           <Route exact element={<UserDashboard/>} path='/userDashboard'/>
+          <Route exact element={<PurchaseSuccessPage/>} path='/purchaseSuccess'/>
+          <Route exact element={<PurchasedTicketPg/>} path='/myTicket/:ticketId'/>
+          <Route exact element={<UpdateTicketForm/>} path='/updateTicket/:ticketId'/>
         </Routes>
       </Router>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom"; //older version use Redirect.
 import SignOut from './SignOut';
-
+import Navbar from "../Navbar";
 
 function SignIn() {
   const [values, setValues] = useState({
@@ -105,6 +105,7 @@ function SignIn() {
 
   return (
     <div>
+      <Navbar/>
       {loading && (
         <div>
           <h2>Loading ... </h2>
@@ -136,9 +137,11 @@ function SignIn() {
         </div>
         <button>Sign In</button>
       </form>
-      <div>
-        <SignOut/>
-      </div>
+        <div>Do not have an account? 
+          <a href="/signUp">
+            Sign up
+          </a>
+        </div>
       </div>
   );
 }

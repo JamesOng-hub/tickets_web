@@ -27,6 +27,26 @@ const ticketSchema = new mongoose.Schema(
     quantity: {
       type: Number,
     },
+    date: {
+      type: String,
+      required: true, 
+    }, 
+    time: {
+      type: String, 
+      required: true, 
+    },
+    expireAt: {
+      type: Date, 
+      // required: true, 
+    },
+    sold: {
+      type: Boolean,
+      default: false,  
+    },
+    purchasedBy: {
+      type: ObjectId, 
+      ref: 'User'
+    },
     user: {
       type: ObjectId, 
       ref: 'User', //this reference here is the reference of the model. 'mongoose.model('User', userSchema)'
@@ -43,6 +63,7 @@ const ticketSchema = new mongoose.Schema(
 // can we use this to list out all the tickets a user posted. 
 // like how we use to list out all the orders that a user placed. 
 
+ticketSchema.index( { "expireAt": 1 }, { expireAfterSeconds: 0 } ); 
 module.exports.ticketSchema = ticketSchema; 
 module.exports.ticketModel = mongoose.model('Ticket', ticketSchema);
 //where is the name of the product used. 
