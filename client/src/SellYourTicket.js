@@ -32,13 +32,12 @@ function SellYourTicket() {
         
       </div> */}
 
-
       <div className="sellYourTicket__usp-container ">
-      <div className="sellYourTicket__usp-title">
+        <div className="sellYourTicket__usp-title">
           Why Sell at Ticket Booth
-      </div>
-        <div className="sellYourTicket__usp-card-container row">
-          <div className="sellYourTicket__usp-card col-md-6 col-12 ">
+        </div>
+        <div className="sellYourTicket__usp-card-container ">
+          <div className="sellYourTicket__usp-card  ">
             <VpnLockIcon className="sellYourTicket__usp-card-icon" />
             <div className="sellYourTicket__usp-card-title">
               It's super safe
@@ -51,7 +50,7 @@ function SellYourTicket() {
               longer for your bank to show the funds in your account.
             </p>
           </div>
-          <div className="sellYourTicket__usp-card col-md-6 col-12 ">
+          <div className="sellYourTicket__usp-card  ">
             <div className="sellYourTicket__usp-card-title">
               It's super safe
             </div>
@@ -63,7 +62,7 @@ function SellYourTicket() {
               longer for your bank to show the funds in your account.
             </p>
           </div>
-          <div className="sellYourTicket__usp-card col-md-6 col-12 ">
+          <div className="sellYourTicket__usp-card  ">
             <div className="sellYourTicket__usp-card-title">
               It's super safe
             </div>
@@ -79,15 +78,17 @@ function SellYourTicket() {
       </div>
       <div className="sellYourTicket__btn-container">
         {!toSell && (
-          <button
-            className="btn btn-outline-success"
-            onClick={() => handleSellClick()}
-          >
-            Sell your ticket now
-          </button>
+          <a href="#formSection">
+            <button
+              className="btn btn-outline-success"
+              onClick={() => handleSellClick()}
+            >
+              Sell your ticket now
+            </button>
+          </a>
         )}
       </div>
-      <div>{toSell && <SubmitTicketForm />}</div>
+      <div  id="formSection">{toSell && <SubmitTicketForm />}</div>
     </>
   );
 }

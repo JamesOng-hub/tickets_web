@@ -33,11 +33,14 @@ function SignOut() {
     }
   };
   return (
-    <div>
+    <div className="signout__background-image">
       <Navbar />
       {redirectUser()}
-      <div>
-        <button onClick={() => removeTokenAndCookie()}>Sign Out</button>
+      <div className="signout__card-container">
+        <div className="signout__card">
+          <div>Confirm Sign Out? </div>
+          <button className="btn btn-outline-danger mx-1 my-2" onClick={() => removeTokenAndCookie()}>Sign Out</button>
+        </div>
       </div>
     </div>
   );

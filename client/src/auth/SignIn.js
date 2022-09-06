@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom"; //older version use Redirect.
-import SignOut from './SignOut';
+import SignOut from "./SignOut";
 import Navbar from "../Navbar";
+import { CircularProgress } from "@mui/material";
 
 function SignIn() {
   const [values, setValues] = useState({
@@ -41,20 +42,18 @@ function SignIn() {
     }
   };
 
-  
-
   const { user } = checkIfAuthenticated();
 
   const postSignInForm = (data) => {
     console.log("submitting signin form");
-    console.log(JSON.stringify(data)); 
+    console.log(JSON.stringify(data));
     //needa return the fetch plsss
     return fetch(`${process.env.REACT_APP_API_URL}/auth/signin`, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        'Content-Type': 'application/json',
-        credentials: 'include',
+        "Content-Type": "application/json",
+        credentials: "include",
       },
       body: JSON.stringify(data),
     })
@@ -65,84 +64,77 @@ function SignIn() {
         console.log(err);
       });
   };
-  
-
-
 
   const handleSubmit = (event) => {
-    event.preventDefault();   //do not fucking misspell this! 
+    event.preventDefault(); //do not fucking misspell this!
     setValues({ ...values, error: false, loading: true });
-    postSignInForm({ email, password })
-    .then((data) => {
+    postSignInForm({ email, password }).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
         storeAuthResToLocalStorage(data);
         setValues({ ...values, redirect: true });
-        console.log(redirect); 
+        console.log(redirect);
       }
     });
   };
 
-
-
-
-
-
-
-  const showError = () => { //doesnt show error
-    error && (<div>We have an error</div>);
+  const showError = () => {
+    //doesnt show error
+    error && <div>We have an error</div>;
   };
 
-  const redirectUser =() => { //works 
+  const redirectUser = () => {
+    //works
     if (redirect) {
       if (user) {
-        console.log('redirecting users');
-        return (<Navigate to='/userDashBoard'/>); //make it redirect to home and change the view to show a different navBar.
+        console.log("redirecting users");
+        return <Navigate to="/userDashBoard" />; //make it redirect to home and change the view to show a different navBar.
       }
     }
   };
 
   return (
-    <div>
-      <Navbar/>
-      {loading && (
-        <div>
-          <h2>Loading ... </h2>
-        </div>
-      )}
-      {error && (<div>{error}</div>)}
+    <div className="signin__background-image">
+      <Navbar />
       {redirectUser()}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label for="email">Email</label>
-          <input
-            className="btn btn-secondary"
-            type="email"
-            id="email"
-            name="email" //req.body.email in backend.
-            onChange={handleChange("email")}
-            autoComplete="off"
-          />
-        </div>
-        <div className="form-group">
-          <label for="password">Password</label>
-          <input
-            className="btn btn-secondary"
-            type="password"
-            id="password"
-            name="password"
-            onChange={handleChange("password")}
-          />
-        </div>
-        <button>Sign In</button>
-      </form>
-        <div>Do not have an account? 
-          <a href="/signUp">
-            Sign up
-          </a>
+      <div>
+        <div className="signin__card">
+          {error && <div>{error}</div>}
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email" //req.body.email in backend.
+                onChange={handleChange("email")}
+                autoComplete="off"
+              />
+            </div>
+            <div className="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                onChange={handleChange("password")}
+              />
+            </div>
+            {loading && <CircularProgress />}
+            {!loading && (
+              <button className="my-2 btn btn-outline-dark">Sign In</button>
+            )}
+          </form>
+          <div className="signin__option">
+            Do not have an account?
+            <a href="/signUp" className="mx-1">
+              Sign up
+            </a>
+          </div>
         </div>
       </div>
+    </div>
   );
 }
 

@@ -2,6 +2,9 @@
 @import './css/submitTicketForm.css'; 
 @import './css/navbar.css'; 
 @import './css/sellYourTicket.css'; 
+@import './css/signout.css'; 
+@import './css/signin.css';
+@import './css/ticketInfo.css';
 
 *{
   /* margin: 0  */
@@ -11,6 +14,11 @@
 
 *, ::after, ::before {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; 
+  /* helps w scrolling on anchor tags.  */
 }
 
 body{

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Navbar from "./Navbar";
-import TestComponent from "./TestComponent";
 
 
 function Home() {
@@ -48,9 +47,16 @@ function Home() {
         </div>
       ))}
     </div>
-    <TestComponent/>
+
     </div>
   );
 }
 
 export default Home;
+
+
+//TODO: search feature for tickets
+//TODO: location feature
+//search location, stadium w google maps. 
+//show location on map. 
+//redirect to google maps from page. 

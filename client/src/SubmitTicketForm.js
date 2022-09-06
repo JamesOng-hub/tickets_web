@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import {checkIfAuthenticated} from "./auth/helperFunctions";
+import { checkIfAuthenticated } from "./auth/helperFunctions";
 import { Navigate } from "react-router-dom";
+import LocationSearchInput from "./LocationSearchInput";
 
 //create a state to update the form fields in real time
 //we are also creating a formData as part of the state
@@ -15,6 +16,7 @@ function SubmitTicketForm() {
     // category: "", //category is an objectId. (or maybe this just to display on form.)
     ticketFile: "", //is a buffer. why string here.
     quantity: "",
+    location: "",
     loading: false,
     error: "",
     //    createdProduct: '',
@@ -29,11 +31,17 @@ function SubmitTicketForm() {
     // category,
     ticketFile,
     quantity,
+    location,
     loading,
     error,
     redirect,
     formData,
   } = values;
+
+  // const [locationObject, setLocationObject] = useState({
+  //   lat: '',
+  //   lng: '',
+  // });
 
   useEffect(() => {
     setValues({
@@ -42,9 +50,15 @@ function SubmitTicketForm() {
     });
   }, []);
 
-  const {token, user} = checkIfAuthenticated(); 
+  const { token, user } = checkIfAuthenticated();
 
-  const handleChange = (fieldName) => (event) => { //calling a function inside of another function. double arrow functions. 
+  const setLocation = (val) => {
+    setValues({ ...values, location: val });
+    formData.set('location', val);
+  };
+
+  const handleChange = (fieldName) => (event) => {
+    // calling a function inside of another function. double arrow functions.
     const value =
       fieldName === "ticketFile" ? event.target.files[0] : event.target.value;
     formData.set(fieldName, value);
@@ -53,14 +67,18 @@ function SubmitTicketForm() {
 
   //positng formData() to the backend.
   const createProduct = (product) => {
-    return fetch(`${process.env.REACT_APP_API_URL}/product/create/${user._id}`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: product,
-    })
+    console.log("product", product);
+    return fetch(
+      `${process.env.REACT_APP_API_URL}/product/create/${user._id}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: product,
+      }
+    )
       .then((response) => {
         return response.json();
       })
@@ -77,7 +95,7 @@ function SubmitTicketForm() {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        setValues({...values, redirect: true}); 
+        setValues({ ...values, redirect: true });
         setValues({
           name: "",
           description: "",
@@ -88,14 +106,14 @@ function SubmitTicketForm() {
           loading: false,
           //    error: '',
           //    createdProduct: '',
-             redirect: false,
+          redirect: false,
         });
       }
     });
   };
   const redirectUser = () => {
     if (redirect) {
-      return (<Navigate to='/'/>);
+      return <Navigate to="/" />;
     }
   };
 
@@ -119,27 +137,30 @@ function SubmitTicketForm() {
   };
 
   const getCurrentdate = () => {
-    return new Date().toJSON().split('T')[0]; 
+    return new Date().toJSON().split("T")[0];
   };
 
   //formdata() in js
   return (
     <div className=".pageBackground--bright">
-      {error && (<div>{error}</div>)}
+      {error && <div>{error}</div>}
       {/* {alertSuccess()}
       {alertLoading()} */}
       {redirectUser()}
       <div className="submitTicketForm__title">Submission Form</div>
-      <form onSubmit={handleSubmit} className="submitTicketForm__form gradient-border ">
+      <form
+        onSubmit={handleSubmit}
+        className="submitTicketForm__form gradient-border "
+      >
         <div className="form-group d-flex flex-column">
           <label for="ticketFile">Submit your ticket in PDF format: </label>
           <input
-            className='btn btn-outline-dark'
+            className="btn btn-outline-dark"
             type="file"
             id="ticketFile"
-            name='ticketFile' //files.<name> is for the files object in the backend. formidible. 
+            name="ticketFile" //files.<name> is for the files object in the backend. formidible.
             onChange={handleChange("ticketFile")}
-            accept='.pdf'
+            accept=".pdf"
           />
         </div>
         <div className="form-group">
@@ -165,21 +186,33 @@ function SubmitTicketForm() {
         </div>
         <div className="form-group d-flex flex-column">
           <label for="Date">Date: </label>
-          <input 
-            type="date" 
-            id="Date" 
+          <input
+            type="date"
+            id="Date"
             name="date"
-            min= {getCurrentdate()} 
-            onChange = {handleChange("date")}
+            min={getCurrentdate()}
+            onChange={handleChange("date")}
           />
         </div>
         <div className="form-group d-flex flex-column">
           <label for="Time">Time: </label>
-          <input 
-            type="time" 
-            id="Time" 
+          <input
+            type="time"
+            id="Time"
             name="time"
-            onChange = {handleChange("time")}
+            onChange={handleChange("time")}
+          />
+        </div>
+        <div className="form-group d-flex flex-column">
+          <label for="Location">Location: </label>
+          {/* <input 
+            type="location" 
+            id="Location" 
+            name="location"
+            onChange = {handleChange("location")}
+          /> */}
+          <LocationSearchInput
+            setLocation={setLocation}
           />
         </div>
         <div className="form-group">
@@ -189,7 +222,7 @@ function SubmitTicketForm() {
             className="form-control"
             id="Price"
             placeholder="Enter Price"
-            min = "0" 
+            min="0"
             value={price}
             onChange={handleChange("price")}
           />
@@ -214,18 +247,14 @@ function SubmitTicketForm() {
             id="Quantity"
             placeholder="Enter Quantity"
             value={quantity}
-            min ="0"
+            min="0"
             onChange={handleChange("quantity")}
           />
         </div>
         <div>
-          <input
-            type='submit'
-            className='btn btn-outline-dark' 
-          />
+          <input type="submit" className="btn btn-outline-dark" />
         </div>
       </form>
-      {/* <button onClick={() => testFunc()}>testFunc</button> */}
     </div>
   );
 }

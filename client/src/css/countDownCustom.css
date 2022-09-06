@@ -1,0 +1,33 @@
+.countDown{
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    margin: 10px; 
+}
+
+.countDown__title{
+    color: #343A40; 
+}
+
+.countDown__time-card-container{
+    display: flex; 
+    margin: 20px auto;
+}
+
+.countDown__time-card{
+    padding: 20px 5px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-end;
+    border-right: 1px dotted black; 
+}
+
+.countDown__Number{
+    font-size: 1.5rem; 
+    font-weight: bolder;
+}
+
+
+.countDown__Num-label{
+    color: #6C757D; 
+}

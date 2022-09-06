@@ -15,6 +15,7 @@
 
 .ticket {
     height: 320px;
+    /* width: 370px;  */
     /* margin: 100px auto; */
     position: relative;
     /* relative to itself.  */
@@ -112,28 +113,20 @@
 }
 
 .sellYourTicket__usp-container{
-    /* background-color: #CED4DA;  */
-    /* margin: 20px;  */
     padding-top: 50px; 
-    padding-bottom: 30px; 
-    /* height: 20rem;  */
-    /* color: black ; */
-    /* display: flex; 
-    flex-direction: column; 
-    align-items: flex-start; */
+
 }
 
 .sellYourTicket__usp-card-container{
     display: flex;
-    flex-wrap: wrap; 
+    flex-direction: column; 
+    padding: 10px 0px; 
 }
 
 
 .sellYourTicket__usp-card{
-    /* height: 450px;  */
-    /* max-width: 300px; */
-    padding: 40px; 
-    margin: 20px 20px; 
+    padding: 20px; 
+    margin-top: 20px; 
     display: flex; 
     flex-direction: column;
     align-items: center;
@@ -161,5 +154,26 @@
     margin: 30px; 
     display: flex;
     justify-content: center;
+}
+
+
+
+@media all and (min-width: 600px){
+  .sellYourTicket__usp-card-container{
+  flex-direction: row;
+}
+
+.sellYourTicket__usp-card{
+  padding: 20px; 
+  margin-left: 20px; 
+  margin-right: 20px; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px; 
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
 }
 

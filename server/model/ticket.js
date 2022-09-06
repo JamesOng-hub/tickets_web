@@ -35,6 +35,10 @@ const ticketSchema = new mongoose.Schema(
       type: String, 
       required: true, 
     },
+    location: {
+      type: String, 
+      required: true, 
+    },
     expireAt: {
       type: Date, 
       // required: true, 

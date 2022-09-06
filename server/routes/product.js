@@ -39,15 +39,16 @@ const create = (req, res) => {
     form.parse(req, (err, fields, files) => {
         console.log('fields: ',  fields); 
         console.log('files: ', files); 
+        console.log(fields.location); 
       if (err) {
         return res.status(400).json({
           error: 'Ticket File could not be uploaded',
         });
       }
       // check for all fields
-      const { name, description, price, quantity, date, time } = fields;
+      const { name, description, price, quantity, date, time, location } = fields;
       //the Names of this fields are specified in the Name property. 
-      if (!name ||!description ||!price ||!quantity || !date || !time) {
+      if (!name ||!description ||!price ||!quantity || !date || !time || !location) {
         return res.status(400).json({
           error: 'All fields are required',
         });
@@ -64,6 +65,11 @@ const create = (req, res) => {
       console.log("ticket expirea at", ticket.expireAt); 
       // 1kb = 1000
       // 1mb = 1000000
+
+
+      //location
+
+
       ticket.user = req.user; 
       if (files.ticketFile) {
         // console.log("FILES PHOTO: ", files.photo);
