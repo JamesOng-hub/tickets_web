@@ -55,6 +55,7 @@ const myListedTickets = (req, res) => {
     console.log(req.user._id); 
   ticketModel
     .find({ user: req.user._id }) //we can query this based on the obejctId. 
+    .select('-ticketFile')
     .populate("user", "_id")
     .sort({ updatedAt: -1 }) //read sort documentation
     .exec((err, tickets) => {
@@ -71,6 +72,7 @@ const myPurchasedTickets = (req, res) => {
   // console.log(req.user._id); 
   ticketModel
     .find({ purchasedBy : req.user._id }) //we can query this based on the obejctId. 
+    .select('-ticketFile')
     .populate("purchasedBy", "_id")
     .sort({ updatedAt: -1 }) //read sort documentation
     .exec((err, tickets) => {

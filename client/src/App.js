@@ -14,6 +14,7 @@ import PurchasedTicketPg from './PurchasedTicketPg';
 import PurchaseSuccessPage from './PurchaseSuccessPage';
 import './App.css'; 
 import SellYourTicket from './SellYourTicket';
+import DisplayPDF from './DisplayPDF';
 
 function App() {
   // const [data, setData] = useState("No data :(");
@@ -40,9 +41,11 @@ function App() {
           <Route exact element={<SignOut/>} path='/signOut'/>
           <Route exact element={<TicketInfo/>} path='/ticketInfo/:ticketId'/>
           <Route exact element={<UserDashboard/>} path='/userDashboard'/>
-          <Route exact element={<PurchaseSuccessPage/>} path='/purchaseSuccess'/>
           <Route exact element={<PurchasedTicketPg/>} path='/myTicket/:ticketId'/>
           <Route exact element={<UpdateTicketForm/>} path='/updateTicket/:ticketId'/>
+          <Route exact element={<PurchasedTicketPg/>} path='/purchasedTicket/:ticketId'/>
+          <Route exact element={<DisplayPDF/>} path='/displayTicket/:ticketId'/>
+          <Route exact element={<PurchaseSuccessPage/>} path='/purchaseSuccessPage/:ticketId'/>
         </Routes>
       </Router>
     </div>

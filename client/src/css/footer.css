@@ -1,0 +1,15 @@
+.footer__position {
+  position: fixed;
+  bottom: 0;
+  width: 100%; 
+  max-width: 1000px; 
+  min-width: 375px;
+}
+
+.background-color-two {
+  background-color: #DEE2E6;
+}
+
+.background-color-three {
+  background-color: white;
+}

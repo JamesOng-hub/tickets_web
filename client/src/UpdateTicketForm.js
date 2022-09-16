@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import { checkIfAuthenticated } from "./auth/helperFunctions";
+import Footer from "./Footer";
 
 function UpdateTicketForm() {
   let { ticketId } = useParams();
@@ -152,8 +153,9 @@ function UpdateTicketForm() {
   // }, []);
 
   return (
-    <div>
-      <Navbar />
+    <div id="page-container">
+    <div id="content-wrap">
+    <Navbar />
       {/* {alertError()} */}
       {updatedTicketName && (
         <div>
@@ -166,7 +168,7 @@ function UpdateTicketForm() {
       {/* {alertLoading()} */}
       {/* {redirectUser()} */}
       {! updatedTicketName && (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className="submitTicketForm__form gradient-border">
               <div class="form-group">
                 <label for="ticketFile">Submit your ticket in PDF format</label>
                 <input
@@ -239,7 +241,13 @@ function UpdateTicketForm() {
             </form>
       )}
 
+
     </div>
+    <footer id="footer">
+      <Footer/>
+    </footer>
+  </div>
+
   );
 }
 

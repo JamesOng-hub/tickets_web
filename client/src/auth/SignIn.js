@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom"; //older version use Redirect.
 import SignOut from "./SignOut";
 import Navbar from "../Navbar";
 import { CircularProgress } from "@mui/material";
+import Footer from '../Footer'
 
 function SignIn() {
   const [values, setValues] = useState({
@@ -95,6 +96,8 @@ function SignIn() {
   };
 
   return (
+    <div id="page-container">
+    <div id="content-wrap">
     <div className="signin__background-image">
       <Navbar />
       {redirectUser()}
@@ -135,6 +138,12 @@ function SignIn() {
         </div>
       </div>
     </div>
+    </div>
+    <footer id="footer">
+     <Footer/>
+    </footer>
+  </div>
+
   );
 }
 

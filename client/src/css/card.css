@@ -1,0 +1,30 @@
+
+.card__custom{   
+  margin: 10px 20px; 
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.card-body-title-container{
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px 10px 20px;
+  background-color: #6C757D;
+  color: white; 
+}
+
+.card-body-btn{
+  display: flex; 
+  align-items: center;
+  color: white; 
+  font-size: 0.8rem; 
+  text-underline-offset: 3px; 
+}
+
+.card-body-dets{
+    display: flex; 
+    align-items: center;
+    margin-bottom: 10px; 
+}
+
+

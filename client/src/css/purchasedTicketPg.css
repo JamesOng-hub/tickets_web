@@ -1,0 +1,10 @@
+.purchasedTicketPg__view-pdf-container{
+    border: #800F2F solid 1px; 
+    border-radius: 3px; 
+    background-color: #FFCCD5;
+    padding: 10px 10px; 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    color: black; 
+}

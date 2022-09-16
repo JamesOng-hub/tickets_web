@@ -35,25 +35,20 @@ function Navbar() {
               )}
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Cart
-              </a>
-            </li>
-            <li className="nav-item">
               {checkIfAuthenticated() && (
                 <a className="nav-link" href="/userDashboard">
                   Profile
                 </a>
               )}
               {!checkIfAuthenticated() && (
-                <a className="nav-link" href="/signIn">
+                <a className="nav-link mr-3" href="/signIn">
                   Sign In
                 </a>
               )}
             </li>
-            <li className="nav-item">
+            <li className="nav-item ">
               {checkIfAuthenticated() && (
-                <a className="nav-link" href="/signOut">
+                <a className="btn btn-secondary " href="/signOut">
                   Sign Out
                 </a>
               )}

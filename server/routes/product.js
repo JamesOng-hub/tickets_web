@@ -27,7 +27,7 @@ const showPDF = (req, res, next) =>{//why do we have to next this?
     res.set('Content-Type', req.ticket.ticketFile.contentType); 
     return res.send(req.ticket.ticketFile.data); 
   }
-  // next(); //whyyyyy
+  next(); //whyyyyy
 }
 
 
@@ -101,7 +101,7 @@ const create = (req, res) => {
 
 const list = (req, res) =>{ //bear in mind, req and res are both standard arguments.
   //sort and limit. 
-  ticketModel.find({sold: false}).exec((err, tickets)=>{
+  ticketModel.find({sold: false}).select('-ticketFile').exec((err, tickets)=>{
     if (err){
       return res.status(400).json({
         error: 'Products not found'
@@ -113,6 +113,7 @@ const list = (req, res) =>{ //bear in mind, req and res are both standard argume
 };
 
 const listOneTicket = (req, res) => {
+  req.ticket.ticketFile = undefined;  
   res.json(req.ticket); 
 };
 
@@ -188,6 +189,25 @@ const listOneTicketPurchased = (req, res) => {
   return; 
 }; 
 
+const searchTicketName = (req, res) => {
+  //url: `search?value=abc` 
+  const query = { sold: false }; //this has to be the dafualt query, it not it will show bought tickets here.
+  if (req.query.value){
+    // query = {name: ` /${req.query.value}/i`}
+    query.name = { $regex: req.query.value , $options: 'i' } //use regex to query the name. 
+  }
+  console.log('sold: ', query.sold); 
+  ticketModel.find(query, (err, tickets) => {
+    if (err) {
+      return res.status(400).json({
+        error: err,
+      });
+    }
+    
+    res.json(tickets);
+  }).select("-ticketFile"); ///this is to exclude as you do not need it. 
+}; 
+
 const testFunc =(req, res) =>{
   res.send('Hello world'); 
 };
@@ -203,6 +223,8 @@ router.get('/list', list);
 router.post('/updateTicket/:userId/:ticketId',requireSignInAndAuth, update);
 router.delete('/deleteTicket/:userId/:ticketId', requireSignInAndAuth, deleteTicket); 
 router.get('/pdf/:ticketId', showPDF);
+router.get('/searchName', searchTicketName);
+
 
 router.param('userId', getUserById); 
 router.param('ticketId', getTicketById); 

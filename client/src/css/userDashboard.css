@@ -61,9 +61,9 @@
 
 .userDashboard__ticket-card-dets{
     display: flex; 
-    align-self: flex-end;
+    align-self: flex-start;
     font-size: 0.8rem; 
-
+    margin-top: 10px; 
 }
 
 .userDashboard__purchased-ticket-card-dets{

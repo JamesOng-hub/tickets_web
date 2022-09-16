@@ -135,7 +135,7 @@ function StripeCheckoutForm({values}) {
         </div> */}
       <form id="payment-form" onSubmit={handleSubmit}>
         <PaymentElement id="payment-element" />
-        <button disabled={isLoading || !stripe || !elements} id="submit">
+        <button disabled={isLoading || !stripe || !elements} id="submit" className="my-2 btn btn-outline-dark">
           <span id="button-text">
             {isLoading ? (
               <div className="spinner" id="spinner">spinner</div>

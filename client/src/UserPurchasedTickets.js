@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import {Link} from 'react-router-dom'; 
 
 function UserPurchasedTickets({ user }) {
   const [values, setValues] = useState({
@@ -56,17 +57,18 @@ function UserPurchasedTickets({ user }) {
               </div>
               <div>
                 <LocationOnIcon />
-                Location
+                {ticket.location}
               </div>
-            </div>
-
-            <div>
-              <button className="btn btn-outline-dark mt-5">View Ticket</button>
-            </div>
+            </div>            
+            <Link to={`/purchasedTicket/${ticket._id}`}> 
+                <button className="btn btn-outline-dark mt-2">View Ticket</button>
+            </Link>
           </div>
         ))}
       </div>
-
+      {purchasedTickets.length === 0 && (
+          <div className="ml-3">No Tickets Purchased!</div>
+        )}
     </div>
   );
 }

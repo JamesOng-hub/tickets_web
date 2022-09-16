@@ -16,6 +16,7 @@ import CountDownCustom from "./CountDownCustom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
 import { useSnackbar } from 'notistack';
+import Footer from './Footer'; 
 
 import {
   FacebookShareButton,
@@ -149,7 +150,8 @@ function TicketInfo() {
   }, []);
 
   return (
-    <div>
+    <div id="page-container">
+    <div id="content-wrap">
       <Navbar />
       <div className="ticketInfo__header-container">
         {/* <ParticlesBg className="particlesBg"/> */}
@@ -242,30 +244,34 @@ function TicketInfo() {
             </RedditShareButton>
           </div>
         </div>
-        <div className="award-card__wrapper"></div>
-      </div>
-
-      <div>
-        <div>Price: {price}</div>
-        <div>Quantity: {quantity}</div>
-        {!toBuyTicket && (
+        <div className="award-card__wrapper">
+          <span className="ticketInfo__desp-title">
+            <div>Buy it Now!</div>
+            <p className="ticketInfo__desp-subtitle">
+              DON'T LET IT GET AWAY!
+            </p>
+            <div className="ticketInfo__payment-info">
+              <div>Price: {price}</div>
+              <div>Quantity: {quantity}</div>
+            </div>
+            {!toBuyTicket && (
           <button
-            variant="contained"
-            color="primary"
             onClick={() => handleToBuyTicket()}
+            className='btn btn-outline-dark'
           >
             Buy Ticket
           </button>
         )}
         {toBuyTicket && <StripePayment values={values} />}
-        <div>Render component of show pdf when paid</div>
-
-        {/* <DisplayPDF ticketId={ticketId} /> */}
-      </div>
-      <div onClick={() => console.log(date + "T" + time + ":00")}>
-        print dateTime
+          </span>
+        </div>
       </div>
     </div>
+    <footer id="footer">
+      <Footer/>
+    </footer>
+  </div>
+
   );
 }
 

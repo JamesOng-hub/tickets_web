@@ -1,66 +1,27 @@
-import React, {useState} from 'react'; 
-import { checkIfAuthenticated } from "./auth/helperFunctions";
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from './Footer'; 
 
 function PurchaseSuccessPage() {
-
-  //call the backend and update the ticket.purchasedBy value. 
-  //show success message, 
-  //btn to see the purchased ticket.  
-
-  //need a better way to update the ownership of the ticket. 
-
-  // const [values, setValues] = useState({
-  //   error: '', 
-  //   success: false, 
-  // }); 
-
-  // const { token, user } = checkIfAuthenticated();
-
-  // const postTicketOwnership = (userData) => {
-  //   return fetch(
-  //       `${process.env.REACT_APP_API_URL}/product/updateOwner/${user._id}/${ticketId}`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           Accept: "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify(userData),
-  //       }
-  //     )
-  //       .then((response) => {
-  //         return response.json();
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  // }; 
-
-  // const updateTicketOwnership = () => {
-  //   postTicketOwnership(user).then((data) => {
-  //     if (data.error){
-  //       setValues({...values, error: data.error});
-  //     }else{
-  //       setValues({...values, success: true});
-  //     }
-  //   });
-  // }; 
-
-  // useEffect(() => {
-  //   updateTicketOwnership(); 
-  // }, [])
-
-
+  let { ticketId } = useParams();
   return (
-    <>
-  
-      <div>
-        <h5>You have successfully purchase this ticket 'ticketName'</h5>
-        <a>Click Here to View Ticket</a>
+      <div id="page-container">
+        <div id="content-wrap">
+          <Navbar />
+          <div className="mt-3">
+            You have successfully purchase your ticket.
+          </div>
+          <Link to={`/displayTicket/${ticketId}`}>
+            <a>Click Here to View Ticket</a>
+          </Link>
+        </div>
+        <footer id="footer">
+        <Footer/>
+      </footer>
       </div>
-    </>
-
-  )
+      
+  );
 }
 
-export default PurchaseSuccessPage
+export default PurchaseSuccessPage;

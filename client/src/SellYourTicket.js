@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SubmitTicketForm from "./SubmitTicketForm";
 import Navbar from "./Navbar";
 import VpnLockIcon from "@mui/icons-material/VpnLock";
+import Footer from './Footer'
 
 function SellYourTicket() {
   const [values, setValues] = useState({
@@ -16,6 +17,7 @@ function SellYourTicket() {
 
   return (
     <>
+    <div>
       <Navbar />
       <div class="ticket">
         <div class="left"></div>
@@ -43,35 +45,25 @@ function SellYourTicket() {
               It's super safe
             </div>
             <p>
-              With TicketSwap, you are guaranteed to receive your money, because
-              buyers pay online. We only send the tickets to the buyer once the
-              payment is complete. We will send your payment the next working
-              day to your banking institution, but please note it may take
-              longer for your bank to show the funds in your account.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla esse blanditiis sit velit ducimus rem, quam architecto optio ullam ipsa quibusdam ipsum est iure laboriosam corrupti reprehenderit, itaque nam hic.
             </p>
           </div>
           <div className="sellYourTicket__usp-card  ">
+            <VpnLockIcon className="sellYourTicket__usp-card-icon" />
             <div className="sellYourTicket__usp-card-title">
               It's super safe
             </div>
             <p>
-              With TicketSwap, you are guaranteed to receive your money, because
-              buyers pay online. We only send the tickets to the buyer once the
-              payment is complete. We will send your payment the next working
-              day to your banking institution, but please note it may take
-              longer for your bank to show the funds in your account.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla esse blanditiis sit velit ducimus rem, quam architecto optio ullam ipsa quibusdam ipsum est iure laboriosam corrupti reprehenderit, itaque nam hic.
             </p>
           </div>
           <div className="sellYourTicket__usp-card  ">
+            <VpnLockIcon className="sellYourTicket__usp-card-icon" />
             <div className="sellYourTicket__usp-card-title">
               It's super safe
             </div>
             <p>
-              With TicketSwap, you are guaranteed to receive your money, because
-              buyers pay online. We only send the tickets to the buyer once the
-              payment is complete. We will send your payment the next working
-              day to your banking institution, but please note it may take
-              longer for your bank to show the funds in your account.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla esse blanditiis sit velit ducimus rem, quam architecto optio ullam ipsa quibusdam ipsum est iure laboriosam corrupti reprehenderit, itaque nam hic.
             </p>
           </div>
         </div>
@@ -89,6 +81,10 @@ function SellYourTicket() {
         )}
       </div>
       <div  id="formSection">{toSell && <SubmitTicketForm />}</div>
+    </div>
+    <div>
+      <Footer/>
+    </div>
     </>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Navbar from "./Navbar";
-
+import Footer from "./Footer";
+import Search from './Search'; 
+import TestComponent from "./TestComponent";
 
 function Home() {
   const [tickets, setTickets] = useState([]);
@@ -37,26 +39,31 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <Navbar/>
-    <div className="home__ticketList row">
-      {tickets.map((ticket, i) => (
-        <div key={i} className="col-sm-6 col-12 bg-light">
-          <Card ticket={ticket}/>
-          {/* <DisplayPDF ticket={ticket}/> */}
+    <div id="page-container">
+      <div id="content-wrap">
+        <Navbar />
+        <Search setTickets={setTickets} setError={setError} /> 
+        <div className="home__ticketList ">
+          {tickets.map((ticket, i) => (
+            <div key={i} className=" bg-light">
+              <Card ticket={ticket} />
+              {/* <DisplayPDF ticket={ticket}/> */}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-
+        <footer id="footer">
+          <Footer />
+        </footer>
+      </div>
+      <TestComponent/> 
     </div>
   );
 }
 
 export default Home;
 
-
 //TODO: search feature for tickets
 //TODO: location feature
-//search location, stadium w google maps. 
-//show location on map. 
-//redirect to google maps from page. 
+//search location, stadium w google maps.
+//show location on map.
+//redirect to google maps from page.
