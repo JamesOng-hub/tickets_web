@@ -7,7 +7,7 @@ function PurchaseSuccessPage() {
   let { ticketId } = useParams();
   return (
       <div id="page-container">
-        <div id="content-wrap">
+        <div id="content-wrap m-3">
           <Navbar />
           <div className="mt-3">
             You have successfully purchase your ticket.

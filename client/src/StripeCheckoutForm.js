@@ -93,7 +93,7 @@ function StripeCheckoutForm({values}) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/",
+        return_url: `https://tickets-web-v1.netlify.app/purchaseSuccessPage/${values.ticketId}`,
       },
     });
 
@@ -138,7 +138,9 @@ function StripeCheckoutForm({values}) {
         <button disabled={isLoading || !stripe || !elements} id="submit" className="my-2 btn btn-outline-dark">
           <span id="button-text">
             {isLoading ? (
-              <div className="spinner" id="spinner">spinner</div>
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
             ) : (
               "Pay now"
             )}

@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { checkIfAuthenticated } from "./auth/helperFunctions";
 import Footer from "./Footer";
 
+
 function UpdateTicketForm() {
   let { ticketId } = useParams();
   const { token, user } = checkIfAuthenticated();
@@ -158,10 +159,10 @@ function UpdateTicketForm() {
     <Navbar />
       {/* {alertError()} */}
       {updatedTicketName && (
-        <div>
-          <h5>
+        <div className="m-3">
+          <div>
             You have succesfully updated your ticket '{updatedTicketName}'
-          </h5>
+          </div>
           <a href="/userDashboard">Return to user dashboard</a>
         </div>
       )}
@@ -235,9 +236,18 @@ function UpdateTicketForm() {
                   onChange={handleChange("quantity")}
                 />
               </div>
-              <div>
-                <input type="submit" class="btn btn-secondary" />
-              </div>
+              {loading ? (
+                // <div class="spinner-border" role="status">
+                //   <span class="sr-only">Loading...</span>
+                // </div>
+                <div className="btn btn-secondary">
+                  Loading ...
+                </div>
+              ): (
+                <div>
+                  <input type="submit" class="btn btn-secondary" />
+                </div>
+              )}
             </form>
       )}
 

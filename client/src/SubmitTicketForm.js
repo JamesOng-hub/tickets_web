@@ -54,7 +54,7 @@ function SubmitTicketForm() {
 
   const setLocation = (val) => {
     setValues({ ...values, location: val });
-    formData.set('location', val);
+    formData.set("location", val);
   };
 
   const handleChange = (fieldName) => (event) => {
@@ -93,7 +93,7 @@ function SubmitTicketForm() {
 
     createProduct(formData).then((data) => {
       if (data.error) {
-        setValues({ ...values, error: data.error });
+        setValues({ ...values, error: data.error, loading: false });
       } else {
         setValues({ ...values, redirect: true });
         setValues({
@@ -211,9 +211,7 @@ function SubmitTicketForm() {
             name="location"
             onChange = {handleChange("location")}
           /> */}
-          <LocationSearchInput
-            setLocation={setLocation}
-          />
+          <LocationSearchInput setLocation={setLocation} />
         </div>
         <div className="form-group">
           <label for="Price">Price: </label>
@@ -251,9 +249,13 @@ function SubmitTicketForm() {
             onChange={handleChange("quantity")}
           />
         </div>
-        <div>
-          <input type="submit" className="btn btn-outline-dark" />
-        </div>
+        {loading ? (
+          <div className="btn btn-outline-dark">Loading...</div>
+        ) : (
+          <div>
+            <input type="submit" className="btn btn-outline-dark" />
+          </div>
+        )}
       </form>
     </div>
   );

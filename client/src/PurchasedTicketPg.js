@@ -204,17 +204,6 @@ function PurchasedTicketPg() {
         </div>
 
       </div>
-
-      <div>
-
-
-        <div>Render component of show pdf when paid</div>
-
-        <DisplayPDF ticketId={ticketId} />
-      </div>
-      <div onClick={() => console.log(date + "T" + time + ":00")}>
-        print dateTime
-      </div>
     </div>
     <footer id="footer">
       <Footer/>

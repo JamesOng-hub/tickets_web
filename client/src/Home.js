@@ -4,10 +4,13 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Search from './Search'; 
 import TestComponent from "./TestComponent";
+import { CircularProgress } from "@mui/material";
+
 
 function Home() {
   const [tickets, setTickets] = useState([]);
   const [error, setError] = useState([]);
+  const [loading, setLoading] = useState(false); 
 
   const fetchTickets = () => {
     return fetch(`${process.env.REACT_APP_API_URL}/product/list`, {
@@ -22,15 +25,18 @@ function Home() {
   };
 
   const loadTickets = () => {
+    setLoading(true); 
     fetchTickets().then((data) => {
       if (data.error) {
         //in the backend we passed a json object w key 'error'
         setError(data.error);
+        setLoading(false); 
       } else {
         setTickets(data);
-        console.log("tickets", tickets);
+        setLoading(false); 
+        // console.log("tickets", tickets);
       }
-      console.log("data:", data);
+      // console.log("data:", data);
     });
   };
 
@@ -44,6 +50,11 @@ function Home() {
         <Navbar />
         <Search setTickets={setTickets} setError={setError} /> 
         <div className="home__ticketList ">
+          {loading && (
+            <div className="home__loading-container">
+              <CircularProgress/>
+            </div>
+          )}
           {tickets.map((ticket, i) => (
             <div key={i} className=" bg-light">
               <Card ticket={ticket} />

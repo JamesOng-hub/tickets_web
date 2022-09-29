@@ -136,7 +136,7 @@ function UserDashboard() {
                       </div>
                       {/* <div><AccessTimeIcon/> {ticket.time}</div> */}
                       <div className="mx-1">
-                        <LocationOnIcon /> LOCATION
+                        <LocationOnIcon /> {ticket.location}
                       </div>
                     </div>
                   </div>

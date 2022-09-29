@@ -41,6 +41,7 @@ import {
   WeiboIcon,
   WhatsappIcon,
 } from "react-share";
+import { CircularProgress } from "@mui/material";
 
 function TicketInfo() {
   let { ticketId } = useParams();
@@ -58,6 +59,7 @@ function TicketInfo() {
     price: 0,
     quantity: 0,
     error: "",
+    loading: false,
     ticketId: ticketId,
   });
 
@@ -66,14 +68,13 @@ function TicketInfo() {
     lng: "",
   });
 
-  const [displayMap, setDisplayMap] = useState(false);
 
   const [toBuyTicket, setToBuyTicket] = useState(false);
   const handleToBuyTicket = (event) => {
     setToBuyTicket(true);
   };
 
-  const { name, description, date, time, location, price, quantity, error } =
+  const { name, description, date, time, location, price, quantity, error, loading } =
     values;
 
   const { enqueueSnackbar } = useSnackbar();
@@ -94,10 +95,11 @@ function TicketInfo() {
   };
 
   const loadTicket = () => {
+    setValues({...values, loading: true}); 
     fetchTicket().then((data) => {
       // console.log('data', data);
       if (data.error) {
-        setValues({ ...values, error: data.error });
+        setValues({ ...values, error: data.error, loading: false });
       } else {
         setValues({
           ...values,
@@ -109,6 +111,7 @@ function TicketInfo() {
           location: data.location,
           // category,
           quantity: data.quantity,
+          loading: false, 
         });
         convertLatLng(data.location);
       }
@@ -153,7 +156,16 @@ function TicketInfo() {
     <div id="page-container">
     <div id="content-wrap">
       <Navbar />
-      <div className="ticketInfo__header-container">
+      {loading && 
+      (
+        <div className="d-flex justify-content-center mt-3">
+          <CircularProgress/>
+        </div>
+      )
+      }
+      {!loading && (
+        <div>
+                <div className="ticketInfo__header-container">
         {/* <ParticlesBg className="particlesBg"/> */}
         <div className="ticketInfo__header-title">{name}</div>
       </div>
@@ -266,6 +278,9 @@ function TicketInfo() {
           </span>
         </div>
       </div>
+        </div>
+      )}
+
     </div>
     <footer id="footer">
       <Footer/>

@@ -10,7 +10,7 @@ function Footer() {
 
             <a
               className="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
+              href="https://www.linkedin.com/in/james-ong-5a721711b/"
               role="button"
               data-mdb-ripple-color="dark"
             >
@@ -18,7 +18,7 @@ function Footer() {
             </a>
             <a
               className="btn btn-link btn-floating btn-lg text-dark m-1"
-              href="#!"
+              href="https://github.com/JamesOng-hub/tickets_web"
               role="button"
               data-mdb-ripple-color="dark"
             >
